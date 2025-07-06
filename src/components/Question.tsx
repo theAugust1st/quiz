@@ -1,15 +1,17 @@
 import { type QuestionSchema } from "../QuestionSchema";
 import Options from "./Options";
 import NextButton from "./NextButton";
-import { useState } from "react";
+import React, { useState, type SetStateAction } from "react";
 import Progress from "./Progress";
 interface QuestionProps {
   questions: QuestionSchema[] | null;
+  openFinish : ()=> void
+  setCalPoints:React.Dispatch<SetStateAction<number>>
+  calPoints:number
 }
-function Question({ questions }: QuestionProps) {
+function Question({ questions,openFinish,setCalPoints,calPoints }: QuestionProps) {
   const [questionNumber, setQuestionNumber] = useState<number>(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [calPoints,setCalPoints] = useState<number>(0)
   if (!questions || questions.length === 0) {
     return <h4>No question available</h4>;
   }
@@ -40,6 +42,9 @@ function Question({ questions }: QuestionProps) {
         <NextButton
           nextQuestion={setQuestionNumber}
           setSelectedOption={setSelectedOption}
+          questionNumber ={questionNumber}
+          questionLength = {questions.length}
+          openFinish={openFinish}
         />
       )}
     </div>
