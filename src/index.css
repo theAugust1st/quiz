@@ -114,6 +114,10 @@ progress {
   background-color: var(--color-theme);
   border-radius: 100px;
 }
+progress::-moz-progress-bar {
+  background-color: #1098ad;
+  border-radius: 100px;
+}
 
 .btn {
   display: block;

@@ -10,7 +10,6 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError,setIsError] = useState<string | null>(null)
   const [activeQuestion, setActiveQuestion] = useState<boolean>(false)
-  const [points,setPoints] = useState<number>(0)
   useEffect(() => {
     async function fetchQuestions() {
       setIsLoading(true);
@@ -31,15 +30,13 @@ function App() {
     }
     fetchQuestions();
   }, []);
-  function handlePoints(points:number){
-    setPoints(points + points)
-  }
   return (
     <div className="app">
       <Header />
       {isLoading && <Loader/>}
 
-      { !isLoading && !isError && activeQuestion?<Question questions={questions} setPoints={()=>handlePoints} />:
+      { !isLoading && !isError && activeQuestion?(
+        <Question questions={questions} />):
           <ScreenSection setActive={setActiveQuestion}/>
       }
       {isError && <Errorr/>}
